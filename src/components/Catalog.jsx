@@ -1,6 +1,7 @@
-const books = []
+import { useSelector } from "react-redux"
 
 const Catalog = () => {
+	const books = useSelector(state => state.bookcase)
 
 	return (
 		<div className="catalog">
