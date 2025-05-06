@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = []  // lista med id:n
+const initialState = []  // lista med {title, id}
 
 
 const favoritesSlice = createSlice({
@@ -8,12 +8,20 @@ const favoritesSlice = createSlice({
 	initialState,
 	reducers: {
 		toggleFavorite: (state, action) => {
-			// action.payload behöver vara id
-			const found = state.find(id => id === action.payload)
-			if( found ) {
-				return state.filter(id => id !== action.payload)
+			// console.log('favoritesReducer slice, payload=', action.payload, state.length)
+			// action.payload: {id, title}
+			const localId = action.payload.id
+			const foundIndex = state.findIndex(book => {
+				console.log('Finding: ', book.id, localId)
+				return book.id === localId})
+			if( foundIndex !== -1 ) {
+				state.splice(foundIndex, 1)
 			} else {
-				state.push(action.payload)
+				state.push({
+					id: localId,
+					title: action.payload.title
+				})
+				console.log('Pushed: length=', state.length)
 			}
 		}
 	}

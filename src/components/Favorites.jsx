@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 
 const Favorites = () => {
 	const stars = useSelector(state => state.favorites)
+	console.log('Favorites stars=', stars)
 
 	return (
 		<div className="favorites">

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = [
-	{ id: 1, title: "Hur man tappar bort sin TV-fjärr 10 gånger om dagen", author: "Bertil Flimmer" },
+	{ id: 1, title: "Hur man tappar bort sin TV-fjärr 10 gånger om dagen", author: "Bertil Flimmer", fav: false },
 	{ id: 2, title: "Kaffekokaren som visste för mycket", author: "Saga Espresson" },
 	{ id: 3, title: "Min katt är min chef", author: "Kattis Jamsson" },
 	{ id: 4, title: "100 sätt att undvika måndagar", author: "Göran Snooze" },
@@ -20,9 +20,14 @@ const bookcaseSlice = createSlice({
 				...action.payload, // title, author
 				id: crypto.randomUUID()
 			})
+		},
+		toggleFav: (state, action) => {
+			// action.payload behöver vara id
+			const found = state.find(book => book.id === action.payload)
+			found.fav = !found.fav
 		}
 	}
 })
 
-export const { addBook } = bookcaseSlice.actions
+export const { addBook, toggleFav } = bookcaseSlice.actions
 export default bookcaseSlice.reducer
