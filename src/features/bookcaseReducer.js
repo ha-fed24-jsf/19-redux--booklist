@@ -14,9 +14,15 @@ const bookcaseSlice = createSlice({
 	name: 'bookcase',  // ett unikt namn
 	initialState,
 	reducers: {
-		// 
+		addBook: (state, action) => {
+			// Vi kan ändra i state direkt eftersom Redux använder biblioteket immer
+			state.push({
+				...action.payload, // title, author
+				id: crypto.randomUUID()
+			})
+		}
 	}
 })
 
-// todo: exportera actions
+export const { addBook } = bookcaseSlice.actions
 export default bookcaseSlice.reducer

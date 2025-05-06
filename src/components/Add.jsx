@@ -1,20 +1,34 @@
+import { useDispatch } from "react-redux"
+import { addBook } from "../features/bookcaseReducer"
+import { useState } from "react"
 
 const Add = () => {
+	const [data, setData] = useState({
+		title: '', author: ''
+	})
+	const dispatch = useDispatch()
+
+	const handleSubmit = () => {
+		// data är vår "action.payload"
+		dispatch( addBook(data) )
+	}
 
 	return (
 		<div className="form">
 			<label> Titel </label>
 			<input type="text"
-				data-testid="add-input-title"
+				value={data.title}
+				onChange={event => setData({ ...data, title: event.target.value })}
 				/>
 
 			<label> Författare </label>
 			<input type="text"
-				data-testid="add-input-author"
+				value={data.author}
+				onChange={event => setData({ ...data, author: event.target.value })}
 				/>
 
 			<button type="submit"
-				data-testid="add-submit"
+				onClick={handleSubmit}
 				> Lägg till ny bok </button>
 		</div>
 	)
