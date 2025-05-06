@@ -1,7 +1,9 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleFavorite } from "../features/favoritesReducer"
 
 const Catalog = () => {
 	const books = useSelector(state => state.bookcase)
+	const dispatch = useDispatch()
 
 	return (
 		<div className="catalog">
@@ -10,6 +12,7 @@ const Catalog = () => {
 					<div
 						className={'star' + (b.fav ? ' selected' : '')}
 						role="button"
+						onClick={() => dispatch(toggleFavorite(b.id))}
 						>❤️</div>
 					"{b.title}", {b.author}
 				</div>

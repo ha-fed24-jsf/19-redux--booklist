@@ -1,6 +1,7 @@
-const stars = []
+import { useSelector } from "react-redux"
 
 const Favorites = () => {
+	const stars = useSelector(state => state.favorites)
 
 	return (
 		<div className="favorites">
